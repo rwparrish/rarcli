@@ -16,3 +16,5 @@ class Game:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
+    
