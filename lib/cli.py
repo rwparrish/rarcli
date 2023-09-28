@@ -19,6 +19,7 @@ def main():
 
 
 def menu():
+    breakpoint()
     print("Please select an option:")
     print("0. Exit the program")
     print("1. Some useful function")
