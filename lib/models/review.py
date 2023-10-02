@@ -17,3 +17,13 @@ class Review:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
+    @classmethod
+    def drop_table(cls):
+        """ Drop the table if it exists """
+        sql = """
+            DROP TABLE IF EXISTS reviews
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+        

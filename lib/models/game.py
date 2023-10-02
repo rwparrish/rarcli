@@ -17,4 +17,14 @@ class Game:
         CURSOR.execute(sql)
         CONN.commit()
         
+    @classmethod
+    def drop_table(cls):
+        """ Drop the table if it exists """
+        sql = """
+            DROP TABLE IF EXISTS games
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+        
+        
     
