@@ -1,4 +1,4 @@
-from models.__init__ import CONN, CURSOR
+# from models.__init__ import CONN, CURSOR
 from models.game import Game
 from models.review import Review
 from faker import Faker

@@ -23,7 +23,9 @@ def menu():
     print("Please select an option:")
     print("0. Exit the program")
     print("1. Some useful function")
-
+    print("2. Some useless Function")
+    print("3. Some other nonsense")
+    print("4. Pancakes")
 
 if __name__ == "__main__":
     main()
