@@ -6,10 +6,11 @@ def exit_program():
     print("Goodbye!")
     exit()
 
-def list_reviews_based_on_genre():
+def view_games_alpha():
     pass
 
 def view_games_based_on_genre():
+    print("Please enter genre:")
     genre_choice = input("> ")
     games = Game.find_games_by_genre(genre_choice)
     print(f'Below are the games with genre: "{genre_choice}".')
@@ -20,5 +21,11 @@ def view_games_based_on_genre():
         count += 1
     print('-------------------------------')
         
-        
+
+def view_games_based_on_avg_rating():
+    pass
+
+
+def list_reviews_based_on_genre():
+    pass      
     
