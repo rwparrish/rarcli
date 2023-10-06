@@ -103,5 +103,38 @@ class Game:
         CURSOR.execute(sql)
         CONN.commit()
         
+    @classmethod
+    def instance_from_db(cls, row):
         
+        """Return a Game object having the attribute values from the table row."""
+
+        # Check the dictionary for an existing instance using the row's primary key
+        game = cls.all.get(row[0])
+        if game:
+            # ensure attributes match row values in case local instance was modified
+            game.title = row[1]
+            game.year = row[2]
+            game.genre = row[3]
+            game.multiplayer = row[4]
+            game.description = row[5]
+
+        else:
+            # not in dictionary, create new instance and add to dictionary
+            game = cls(row[1], row[2], row[3], row[4], row[5])
+            game.id = row[0]
+            cls.all[game.id] = game
+        return game
+        
+    @classmethod   
+    def find_games_by_genre(cls, genre):
+        """Return a game objects corresponding to the table rows with the matching genre"""
+        sql = """
+            SELECT *
+            FROM games
+            WHERE genre is ?
+        """
+
+        rows = CURSOR.execute(sql, (genre,)).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+
     
