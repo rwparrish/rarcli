@@ -103,6 +103,7 @@ class Game:
         CURSOR.execute(sql)
         CONN.commit()
         
+        
     @classmethod
     def instance_from_db(cls, row):
         
@@ -124,6 +125,31 @@ class Game:
             game.id = row[0]
             cls.all[game.id] = game
         return game
+    
+    @classmethod
+    def find_by_id(cls, id):
+        """Return a game object with a matching id"""
+        sql = """
+            SELECT *
+            FROM games
+            WHERE id is ?
+        """
+        
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row)
+    
+    
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Game object per row in the table"""
+        sql = """
+            SELECT *
+            FROM games
+        """
+        
+        rows = CURSOR.execute(sql).fetchall()
+        # game dict for row in rows
+        return [cls.instance_from_db(row) for row in rows]
         
     @classmethod   
     def find_games_by_genre(cls, genre):
@@ -137,4 +163,20 @@ class Game:
         rows = CURSOR.execute(sql, (genre,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
 
-    
+    # def get_review_ratings(self, identifier):
+    #     """Get list of ratings for reviews of this game looked up by title or id"""
+    #     if isinstance(identifier, int):
+    #     # Look up by id
+    #     game = Game.find_by_id(identifier) 
+    #     else:
+    #     # Look up by title 
+    #     game = next((g for g in Game.get_all() if g.title == identifier), None)
+
+    #     if not game:
+    #     raise ValueError("No game found")
+        
+    #     ratings = []
+    #     for review in Review.find_by_game(game.id):
+    #     ratings.append(review.rating)
+
+    #     return ratings
