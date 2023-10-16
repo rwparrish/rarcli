@@ -162,21 +162,15 @@ class Game:
 
         rows = CURSOR.execute(sql, (genre,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
-
-    # def get_review_ratings(self, identifier):
-    #     """Get list of ratings for reviews of this game looked up by title or id"""
-    #     if isinstance(identifier, int):
-    #     # Look up by id
-    #     game = Game.find_by_id(identifier) 
-    #     else:
-    #     # Look up by title 
-    #     game = next((g for g in Game.get_all() if g.title == identifier), None)
-
-    #     if not game:
-    #     raise ValueError("No game found")
+    
+    def reviews(self):
+        """Return a list of reviews for the game"""
+        from models.review import Review
+        sql = """
+            SELECT *
+            FROM reviews
+            WHERE game_id is ?
+        """
         
-    #     ratings = []
-    #     for review in Review.find_by_game(game.id):
-    #     ratings.append(review.rating)
-
-    #     return ratings
+        rows = CURSOR.execute(sql, (self.id,)).fetchall()
+        return [Review.instance_from_db(row) for row in rows]

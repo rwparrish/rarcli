@@ -1,6 +1,7 @@
 # lib/helpers.py
 from models.game import Game
 from models.review import Review
+
 import ipdb
 
 def exit_program():
@@ -28,8 +29,7 @@ def view_games_based_on_avg_rating():
     games = Game.get_all()
     games_with_avg_rating = []
     for game in games:
-        game_reviews = Review.reviews_by_game_id(game.id)
-        game.average_rating = average_rating(game_reviews)
+        game.average_rating = average_rating(game.reviews())
         games_with_avg_rating.append(game)
     games_sorted_by_avg_rating = sorted(games_with_avg_rating, key=lambda game: game.average_rating, reverse=True)
     print("Games listed by Average Rating:")

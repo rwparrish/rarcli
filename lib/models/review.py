@@ -125,10 +125,4 @@ class Review:
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
        
-        
-    
-    # @classmethod
-    # def find_by_game(cls, game_id):
-    #     sql = "SELECT * FROM reviews WHERE game_id=?"
-    #     rows = CURSOR.execute(sql, (game_id,)).fetchall()
-    #     return [cls.instance_from_db(row) for row in rows]
+
