@@ -42,7 +42,12 @@ def view_games_based_on_avg_rating():
 
 
 def list_reviews_based_on_genre():
-    pass      
+    print("Please enter genre:")
+    genre_choice = input("> ")
+    games = Game.find_games_by_genre(genre_choice)
+    for game in games:
+        print(f'Reviews for {game.title}')
+        list_reviews(game.reviews())
 
 
 def list_games(games):
@@ -51,6 +56,15 @@ def list_games(games):
         print(f'{count}. {game.title}')
         count += 1
     print('-------------------------------')
+    
+    
+def list_reviews(reviews):
+    count = 1
+    for review in reviews:
+        print(f'{count}. {review.header} - {review.rating} - {review.content}')
+        count += 1
+    print('-------------------------------')
+
 
 def average_rating(reviews):
     ratings = [review.rating for review in reviews]

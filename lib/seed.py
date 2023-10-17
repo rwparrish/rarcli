@@ -21,10 +21,10 @@ def seed_database():
     Game.create_table()
     Review.create_table()
     
-    for i in range(10):
+    for i in range(50):
         game = Game(title=fake.sentence(nb_words=3)[:-1], year=fake.year(), genre=fake.video_game_genre(), multiplayer=fake.boolean(), description=fake.text())
         game.save()
-        for i in range(3):
+        for i in range(5):
             review = Review(header=fake.word(), rating=fake.random_int(min=1, max=10), content=fake.text(), game_id=game.id)
             review.save()
             

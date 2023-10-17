@@ -23,7 +23,16 @@ def main():
                 elif browse_choice == "4":
                     list_reviews_based_on_genre()
         elif choice == "2":
-            manage_menu()
+            while True:
+                manage_menu()
+                manage_choice = input("> ")
+                if manage_choice == "0":
+                    main()
+                elif manage_choice == "1":
+                    enter_new_game()
+                elif manage_choice == "2": 
+                    delete_game
+                
         else:
             print("Invalid choice")
 
@@ -49,16 +58,11 @@ def manage_menu():
     print('-------------------------------')
     print("0. Return to previous menu")
     print("1. Enter a new game")
-    print("2. Update an existing game")
+    print("2. Delete an existing game")
     print("3. Enter a new review for an existing game")
-    print("4. Display reviews for an existing game")
+    print("4. Update a review for an existing game")
+    print("5. Delete a review for an existing game")
 
-def reviews_menu(): #list all reviews for the game entered in line 54 above
-    print("Please select an option:")
-    print('-------------------------------')
-    print("0. Return to previous menu")
-    print("1. Enter a review number to update")
-    print("2. Enter a review number to delete")
 
 if __name__ == "__main__":
     main()
