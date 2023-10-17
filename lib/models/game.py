@@ -77,6 +77,18 @@ class Game:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+        
+    def delete(self):
+        """Delete an instance of a game from games if game exists"""
+        sql = """
+            DELETE FROM games WHERE id is ?
+        """
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+        
+        del type(self).all[self.id]
+        self.id = None
+                    
 
     @classmethod
     def create_table(cls):

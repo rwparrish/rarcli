@@ -30,8 +30,8 @@ def main():
                     main()
                 elif manage_choice == "1":
                     new_game()
-                # elif manage_choice == "2": 
-                #     # delete_game()
+                elif manage_choice == "2": 
+                    delete_game()
                 # elif manage_choice == "3":
                 #     # new_review()
                 # elif manage_choice == "4":

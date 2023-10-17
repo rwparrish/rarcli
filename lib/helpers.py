@@ -21,13 +21,36 @@ def new_game():
     genre = input("Enter the genre of the game: ")
     multi = int(input("Enter '1' for yes and '0' for no: "))
     description = input("Enter a game description (10 - 50 characters): ")
-    new_game  = Game(title, year, genre, multi, description)
+    new_game = Game(title, year, genre, multi, description)
     new_game.save()
     print("Game successfully added.")
     input("Press enter to display list of games.")
     view_games_alpha()
+    
+
+def delete_game():
+    print("Please select the game you wish to delete:")
+    view_games_by_id()
+    game_id = int(input("> "))
+    game =  Game.all.get(game_id)
+    user_input = input(f"Are you sure you would like to delete {game.title}? Enter 'y' or 'n'. ")
+    # print(f"Are you sure you would like to delete {game.title}?")  
+    if user_input == "y":
+        game.delete()
+        print("Game has been deleted.")
+    elif user_input == "n":
+        delete_game()
+        
+        
 
     
+def view_games_by_id():
+    games = Game.get_all()
+    games.sort(key=lambda game: game.id)
+    print('-------------------------------')
+    list_games(games)
+
+
 def view_games_based_on_genre():
     print("Please enter genre:")
     genre_choice = input("> ")
