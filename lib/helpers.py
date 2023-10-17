@@ -15,6 +15,18 @@ def view_games_alpha():
     print('-------------------------------')
     list_games(games)
     
+def new_game():
+    title = input("Enter the title of the game: ")
+    year = input("Enter the year of the game: ")
+    genre = input("Enter the genre of the game: ")
+    multi = int(input("Enter '1' for yes and '0' for no: "))
+    description = input("Enter a game description (10 - 50 characters): ")
+    new_game  = Game(title, year, genre, multi, description)
+    new_game.save()
+    print("Game successfully added.")
+    input("Press enter to display list of games.")
+    view_games_alpha()
+
     
 def view_games_based_on_genre():
     print("Please enter genre:")
