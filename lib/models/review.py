@@ -116,15 +116,4 @@ class Review:
         return review
     
     
-    # replaced with reviews method in game.py
-    # @classmethod
-    # def reviews_by_game_id(cls, game_id):
-    #     """ Return all reviews for a given game """
-    #     sql = """
-    #         SELECT * FROM reviews WHERE game_id = ?
-    #     """
-    #     CURSOR.execute(sql, (game_id,))
-    #     rows = CURSOR.fetchall()
-    #     return [cls.instance_from_db(row) for row in rows]
-       
-
+    
