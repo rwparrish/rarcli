@@ -30,8 +30,6 @@ def new_game():
 
 def delete_game():
     print("Please select the game you wish to delete:")
-    print('-------------------------------')
-    print("0. Return to previous menu")
     view_games_by_id()
     user_choice = int(input("> "))
     if user_choice == 0:
@@ -49,6 +47,8 @@ def delete_game():
 def view_games_by_id():
     games = Game.get_all()
     games.sort(key=lambda game: game.id)
+    print('-------------------------------')
+    print("0. Return to previous menu")
     list_games(games)
 
 
@@ -101,6 +101,10 @@ def list_reviews(reviews):
         count += 1
     print('-------------------------------')
 
+# def view_reviews_by_id():
+#     reviews = Review.get_all()
+#     reviews.sort(key=lambda review: review.id)
+#     list_reviews(reviews)
 
 def average_rating(reviews):
     ratings = [review.rating for review in reviews]
@@ -123,3 +127,43 @@ def new_review():
     print("Review successfully added.")
     input("Press enter to display the list of reviews for this game:")
     list_reviews(game.reviews())
+    
+
+def update_review():
+    print("Please select the game you would like to update a review:")
+    print('-------------------------------')
+    view_games_by_id()
+    game_choice = int(input("> "))
+    if game_choice == 0:
+        manage_menu()
+    else:
+        game = Game.all.get(game_choice)
+        print('-------------------------------')
+        print("0. Return to previous menu")
+        list_reviews(game.reviews())
+        print("Please enter the header of the review to update:")
+        review_choice = (input("> "))
+        found_review = None
+        for review in Review.all.values():
+            # ipdb.set_trace()
+            if review.header.lower() == review_choice.lower():
+                found_review = review
+                break
+        user_input = input(f"Are you sure you would like to update {review.header}? Enter 'y' or 'n'. ") 
+        if user_input == "y":
+            review.header = input("Enter the header of your review: ")
+            review.rating = int(input("Enter a rating from 1 - 5: "))
+            review.content = input("Enter the content of your review: ")
+            review.update()
+            print("Review successfully updated.")
+            input("Press enter to display the list of reviews for this game:")
+            list_reviews(game.reviews())
+        elif user_input == "n":
+            update_review()
+
+
+    
+#     if header == review_choice:
+#   # case sensitive match 
+#     elif header.lower() == review_choice.lower(): 
+#    # case insensitive match 

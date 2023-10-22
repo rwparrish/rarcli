@@ -69,6 +69,17 @@ class Review:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+        
+    def update(self):
+        """ Update the attributes of a Review instance in the database """
+        sql = """
+            UPDATE reviews
+            SET header = ?, rating = ?, content = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.header, self.rating, self.content, self.id))
+        CONN.commit()
+        type(self).all[self.id] = self
 
     @classmethod
     def create_table(cls):

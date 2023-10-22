@@ -34,8 +34,8 @@ def main():
                     delete_game()
                 elif manage_choice == "3":
                     new_review()
-                # elif manage_choice == "4":
-                #     # update_review()
+                elif manage_choice == "4":
+                    update_review()
                 # elif manage_choice == "5":
                     # delete_review()
         else:
