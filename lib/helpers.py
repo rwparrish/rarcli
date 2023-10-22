@@ -1,7 +1,7 @@
 # lib/helpers.py
 from models.game import Game
 from models.review import Review
-
+from cli  import manage_menu
 import ipdb
 
 def exit_program():
@@ -30,24 +30,25 @@ def new_game():
 
 def delete_game():
     print("Please select the game you wish to delete:")
+    print('-------------------------------')
+    print("0. Return to previous menu")
     view_games_by_id()
-    game_id = int(input("> "))
-    game =  Game.all.get(game_id)
-    user_input = input(f"Are you sure you would like to delete {game.title}? Enter 'y' or 'n'. ")
-    # print(f"Are you sure you would like to delete {game.title}?")  
-    if user_input == "y":
-        game.delete()
-        print("Game has been deleted.")
-    elif user_input == "n":
-        delete_game()
+    user_choice = int(input("> "))
+    if user_choice == 0:
+        manage_menu()
+    else:
+        game =  Game.all.get(user_choice)
+        user_input = input(f"Are you sure you would like to delete {game.title}? Enter 'y' or 'n'. ") 
+        if user_input == "y":
+            game.delete()
+            print("Game has been deleted.")
+        elif user_input == "n":
+            delete_game()
         
-        
-
     
 def view_games_by_id():
     games = Game.get_all()
     games.sort(key=lambda game: game.id)
-    print('-------------------------------')
     list_games(games)
 
 

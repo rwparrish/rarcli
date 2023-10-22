@@ -14,15 +14,18 @@ class Game:
         self.multiplayer = multiplayer
         self.description = description
         
+        
     @property
     def title(self):
         return self.__title
+    
     
     @title.setter
     def title(self, title):
         if not isinstance(title, str):
             raise TypeError("Title must be a string")
         self.__title = title
+        
         
     @property
     def year(self):
@@ -34,9 +37,11 @@ class Game:
             raise TypeError("Year must be a string")
         self.__year = year
         
+        
     @property
     def genre(self):
         return self.__genre
+    
     
     @genre.setter
     def genre(self, genre):
@@ -44,9 +49,11 @@ class Game:
             raise TypeError("Genre must be a string")
         self.__genre = genre
         
+        
     @property
     def multiplayer(self):
         return self.__multiplayer
+    
     
     @multiplayer.setter
     def multiplayer(self, multiplayer):
@@ -55,17 +62,18 @@ class Game:
         else:
             raise TypeError("Multiplayer entry is not a zero or one")
         
+        
     @property
     def description(self):
         return self.__description
+    
     
     @description.setter
     def description(self, description):
         if not isinstance(description, str) or not len(description) >= 10:
             raise TypeError("Description must be a string and at least 10 characters")
         self.__description = description
-        
-        
+           
         
     def save(self):
         """ Persist the attributes of a Game instance to the database """
@@ -77,6 +85,7 @@ class Game:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+        
         
     def delete(self):
         """Delete an instance of a game from games if game exists"""
@@ -105,6 +114,7 @@ class Game:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
         
     @classmethod
     def drop_table(cls):
@@ -138,6 +148,7 @@ class Game:
             cls.all[game.id] = game
         return game
     
+    
     @classmethod
     def find_by_id(cls, id):
         """Return a game object with a matching id"""
@@ -162,6 +173,7 @@ class Game:
         rows = CURSOR.execute(sql).fetchall()
         # game dict for row in rows
         return [cls.instance_from_db(row) for row in rows]
+    
         
     @classmethod   
     def find_games_by_genre(cls, genre):
@@ -174,6 +186,7 @@ class Game:
 
         rows = CURSOR.execute(sql, (genre,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
     
     def reviews(self):
         """Return a list of reviews for the game"""
