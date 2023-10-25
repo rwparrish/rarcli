@@ -36,8 +36,8 @@ def main():
                     new_review()
                 elif manage_choice == "4":
                     update_review()
-                # elif manage_choice == "5":
-                    # delete_review()
+                elif manage_choice == "5":
+                    delete_review()
         else:
             print("Invalid choice")
 

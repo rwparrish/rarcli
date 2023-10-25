@@ -81,6 +81,18 @@ class Review:
         CONN.commit()
         type(self).all[self.id] = self
 
+    def delete(self):
+        """Delete an instance of a review from reviews if review exists"""
+        sql = """
+            DELETE FROM reviews WHERE id is ?
+        """
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+        
+        del type(self).all[self.id]
+        self.id = None
+
+
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Reviews instances """
@@ -125,6 +137,7 @@ class Review:
             review.id = row[0]
             cls.all[review.id] = review
         return review
+    
     
     
     

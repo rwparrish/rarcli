@@ -1,4 +1,5 @@
 # lib/helpers.py
+
 from models.game import Game
 from models.review import Review
 from cli  import manage_menu
@@ -142,13 +143,13 @@ def update_review():
         print("0. Return to previous menu")
         list_reviews(game.reviews())
         print("Please enter the header of the review to update:")
-        review_choice = (input("> "))
+        review_choice = input("> ")
         found_review = None
         for review in Review.all.values():
-            # ipdb.set_trace()
             if review.header.lower() == review_choice.lower():
                 found_review = review
                 break
+            # check for found_review before proceeding???
         user_input = input(f"Are you sure you would like to update {review.header}? Enter 'y' or 'n'. ") 
         if user_input == "y":
             review.header = input("Enter the header of your review: ")
@@ -160,10 +161,32 @@ def update_review():
             list_reviews(game.reviews())
         elif user_input == "n":
             update_review()
-
-
-    
-#     if header == review_choice:
-#   # case sensitive match 
-#     elif header.lower() == review_choice.lower(): 
-#    # case insensitive match 
+            
+def delete_review():
+    print("Please select the game you would like to delete a review:")
+    print('-------------------------------')
+    view_games_by_id()
+    game_choice = int(input("> "))
+    if game_choice == 0:
+        manage_menu()
+    else:
+        game = Game.all.get(game_choice)
+        print('-------------------------------')
+        print("0. Return to previous menu")
+        list_reviews(game.reviews())
+        print("Please enter the header of the review to delete:")
+        review_choice = input("> ")
+        found_review = None
+        for review in Review.all.values():
+            if review.header.lower() == review_choice.lower():
+                found_review = review
+                break
+            # check for found_review before proceeding???
+        user_input = input(f"Are you sure you would like to delete {review.header}? Enter 'y' or 'n'. ") 
+        if user_input == "y":
+            review.delete()
+            print("Review successfully deleted.")
+            input("Press enter to display the list of reviews for this game:")
+            list_reviews(game.reviews())
+        elif user_input == "n":
+            delete_review()
