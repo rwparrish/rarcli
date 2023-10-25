@@ -76,6 +76,7 @@ class Game:
            
         
     def save(self):
+        
         """ Persist the attributes of a Game instance to the database """
         sql = """
             INSERT INTO games (title, year, genre, multiplayer, description)

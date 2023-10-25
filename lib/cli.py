@@ -22,6 +22,8 @@ def main():
                     view_games_based_on_avg_rating()
                 elif browse_choice == "4":
                     list_reviews_based_on_genre()
+                else:
+                    print("Invalid choice")
         elif choice == "2":
             while True:
                 manage_menu()
@@ -38,6 +40,8 @@ def main():
                     update_review()
                 elif manage_choice == "5":
                     delete_review()
+                else:
+                    print("Invalid choice")
         else:
             print("Invalid choice")
 
