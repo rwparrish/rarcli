@@ -56,13 +56,10 @@ def view_games_by_id():
 def view_games_based_on_genre():
     print("Please enter genre:")
     genre_choice = input("> ")
-    found_games = []
+    
     # not sure why Game.all is {} here
-    ipdb.set_trace()
-    for game in Game.all.values(): 
-        if game.genre.lower() == genre_choice.lower():
-            found_games.append(game)
-    # games = Game.find_games_by_genre(genre_choice)
+    
+    found_games = [game for game in Game.get_all() if game.genre.lower() == genre_choice.lower()]
     print(f'Below are the games with genre: "{genre_choice}".')
     print('-------------------------------')
     list_games(found_games)
