@@ -163,7 +163,10 @@ def update_review():
         user_input = input(f"Are you sure you would like to update {review.header}? Enter 'y' or 'n'. ") 
         if user_input == "y":
             review.header = input("Enter the header of your review: ")
-            review.rating = int(input("Enter a rating from 1 - 5: "))
+            user_rating = None
+            while user_rating not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
+                user_rating = input("Enter a rating from 1 - 10: ")
+            review.rating = int(user_rating)         
             review.content = input("Enter the content of your review: ")
             review.update()
             print("Review successfully updated.")
